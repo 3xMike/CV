@@ -17,6 +17,6 @@ string Join(char c, const Container& cont) {
   os << *rbegin(cont);
   return os.str();
 }
-// Join всем элементам, кроме ласт присоединяет char
+
 string_view Strip(string_view s);
 vector<string_view> SplitBy(string_view s, char sep);

@@ -34,7 +34,7 @@ void Database::AddEvent(const Date& date, const string& event) {
 	}
 	auto beg = storage.at(date).begin();
 	auto end = storage.at(date).end();
-	if (find(beg,end, event) == end){//Т е не добавляем одинаковые
+	if (find(beg,end, event) == end){//Г’ ГҐ Г­ГҐ Г¤Г®ГЎГ ГўГ«ГїГҐГ¬ Г®Г¤ГЁГ­Г ГЄГ®ГўГ»ГҐ
 		storage[date].push_back(event);
 	}
 }
@@ -43,9 +43,9 @@ int Database::DeleteIf(shared_ptr<Node> node) {
 	int delete_count = 0;
 
 	for (auto It = storage.begin(); It != storage.end(); ++It){
-		auto begin = stable_partition(It->second.begin(), It->second.end(), // при удалении отсортированного stable_partition вектора сохраняется порядок оставшихся, при этом удаление из конца вектора
+		auto begin = stable_partition(It->second.begin(), It->second.end(),
 				[node, It](string event){
-					return !node->Evaluate(It->first, event);//?????????????????????????????????
+					return !node->Evaluate(It->first, event);
 				});
 		size_t sz = It->second.end() - begin;
 		It->second.erase(begin, It->second.end());
@@ -56,7 +56,7 @@ int Database::DeleteIf(shared_ptr<Node> node) {
 }
 
 set<pair<Date,string>> Database::FindIf(shared_ptr<Node> node) const {
-	set<pair<Date,string>> answer; // Таким образом при выводе они будут отсортированы, нужно перегрузить для пары <
+	set<pair<Date,string>> answer; 
 	for (auto& item : storage){
 		for (const auto& event : item.second){
 			if (node->Evaluate(item.first, event)){
@@ -71,7 +71,6 @@ set<pair<Date,string>> Database::Print() const {
 	set<pair<Date,string>> answer;
 	for (const auto& item : storage) {
 		for (const string& event : item.second) {
-			//нужно отсортировать, поэтому хуячим set
 			answer.insert(make_pair(item.first, event));
 		}
 	}

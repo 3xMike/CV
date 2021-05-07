@@ -44,17 +44,11 @@ int main() {
 				cout << entry << endl;
 			}
 		} else if (command == "Del") {
-			auto condition = ParseCondition(is); //shared<Node>
-//			auto predicate = [condition](const Date& date, const string& event) {
-//				return condition->Evaluate(date, event);
-//			};
+			auto condition = ParseCondition(is); 
 			int count = db.DeleteIf(condition);
 			cout << "Removed " << count << " entries" << endl;
 		} else if (command == "Find") {
 			auto condition = ParseCondition(is);
-//			auto predicate = [condition](const Date& date, const string& event) {
-//				return condition->Evaluate(date, event);
-//			};
 			const auto entries = db.FindIf(condition);
 			for (const auto& entry : entries) {
 				cout << entry << endl;
@@ -63,7 +57,6 @@ int main() {
 
 		} else if (command == "Last") {
 			try {
-// KEKWait
 			string date_str;
 			is >> date_str;
 			cout << db.Last(ParseDate(date_str)) << endl;

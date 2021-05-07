@@ -9,7 +9,7 @@
 vector<string> SplitIntoWords(string line) {
   istringstream words_input(move(line));
   return {istream_iterator<string>(words_input), istream_iterator<string>()};
-}//äåëèò ñòðîêó áåç \n íà ñëîâà
+}
 
 SearchServer::SearchServer(istream& document_input) {
   UpdateDocumentBase(document_input);

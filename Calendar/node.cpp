@@ -13,7 +13,7 @@ bool EmptyNode::Evaluate(const Date& date, const string& event) const{
 
 bool DateComparisonNode::Evaluate(const Date& date, const string& event) const {
 	if (_cmp == Comparison::Less){
-		return date < _date; //_date -- справа, date -- слева (в словаре)
+		return date < _date; 
 	} else if (_cmp == Comparison::LessOrEqual){
 		return !(date > _date);
 	} else if (_cmp == Comparison::Greater){
@@ -30,7 +30,7 @@ bool DateComparisonNode::Evaluate(const Date& date, const string& event) const {
 
 bool EventComparisonNode::Evaluate(const Date& date, const string& event) const {
 	if (_cmp == Comparison::Less){
-		return event < _value; //_value -- справа, event -- слева (в словаре)
+		return event < _value; 
 	} else if (_cmp == Comparison::LessOrEqual){
 		return event <= _value;
 	} else if (_cmp == Comparison::Greater){

@@ -5,12 +5,11 @@
 #include <iterator>
 #include <sstream>
 #include <iostream>
-// ЕДИНСТВЕННОЕ, ЧТО Я ПРОПУСТИЛ
-// 			!ЗАМЕРЯЙТЕ!
+
 vector<string> SplitIntoWords(string line) {
   istringstream words_input(move(line));
   return {istream_iterator<string>(words_input), istream_iterator<string>()};
-}//делит строку без \n на слова
+}//Г¤ГҐГ«ГЁГІ Г±ГІГ°Г®ГЄГі ГЎГҐГ§ \n Г­Г  Г±Г«Г®ГўГ 
 
 SearchServer::SearchServer(istream& document_input) {
   UpdateDocumentBase(document_input);
@@ -25,23 +24,21 @@ void SearchServer::UpdateDocumentBase(istream& document_input) {
 void SearchServer::AddQueriesStream(
   istream& query_input, ostream& search_results_output
 ) {
-  vector<size_t> docid_count(index.Size()); // тут храниться число вхождений для запроса документа [docid]
-  for (string current_query; getline(query_input, current_query); ) { // считываем запросы
-    const auto words = SplitIntoWords(current_query); // все слова в одном запросе
+  vector<size_t> docid_count(index.Size()); 
+  for (string current_query; getline(query_input, current_query); ) { 
+    const auto words = SplitIntoWords(current_query); 
 
-//    map<size_t, size_t> docid_count; // документ + число его вхождений
-//    так как docid - подряд идущие числа от 0 до index.docs.size()-1, вместо map<size_t,size_t> ебанём vector<size_t>
 
     for (auto& i : docid_count){
-    	i = 0; //можно вынести за for, чтобы не выделять память лишний раз
+    	i = 0; 
     }
-    for (const auto& word : words) { // для каждого слова в запросе
-      for (const size_t docid : index.Lookup(word)) { // для каждого дока для этого слова
-        docid_count[docid]++; // раньше map искал docid за log N, а теперь поиск в векторе за const
-      }// теперь в словаре релевантность документов, отсортированная по докам
+    for (const auto& word : words) { 
+      for (const size_t docid : index.Lookup(word)) { 
+        docid_count[docid]++;
+      }
     }
     vector<pair<size_t, size_t>> search_results;
-    for (size_t docid = 0; docid != docid_count.size(); ++docid){//заполнение
+    for (size_t docid = 0; docid != docid_count.size(); ++docid){
     	if (size_t count = docid_count[docid]; count != 0){
         	search_results.push_back(
         			make_pair(docid, count)
@@ -49,18 +46,12 @@ void SearchServer::AddQueriesStream(
     	}
 
     }
-    	//отсортировать по второму аргументу по убыванию, потом по первому по возрастанию
-        // ну тут точно надо фиксить: нам не нужен полностью отсортированный список -- нам нужно только первые 5 запросов.
-    	// поэтому пользуемся partial_sort:
+
     partial_sort(
       begin(search_results),
 	  min(begin(search_results) + 5, end(search_results)),
       end(search_results),
       [](pair<size_t, size_t> lhs, pair<size_t, size_t> rhs) {
-//        int64_t lhs_docid = lhs.first;
-//        auto lhs_hit_count = lhs.second;
-//        int64_t rhs_docid = rhs.first;
-//        auto rhs_hit_count = rhs.second;
         return make_pair(lhs.second, -static_cast<int64_t>(lhs.first)) > make_pair(rhs.second, -static_cast<int64_t>(rhs.first));
       }
     );

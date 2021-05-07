@@ -13,7 +13,6 @@ ostream& operator << (ostream& out, const vector<T>& vi);
 template <typename Key, typename Value>
 ostream& operator << (ostream& out, const map<Key, Value>& m);
 
-// элементы контейнера в строку
 template <typename Collection>
 string Join(const Collection& c, char d) {
   stringstream ss;
@@ -27,17 +26,17 @@ string Join(const Collection& c, char d) {
   }
   return ss.str();
 }
-// вывод пары
+
 template <typename First, typename Second>
 ostream& operator << (ostream& out, const pair<First, Second>& p) {
   return out << '(' << p.first << ',' << p.second << ')';
 }
-// вывод вектора
+
 template <typename T>
 ostream& operator << (ostream& out, const vector<T>& vi) {
   return out << '[' << Join(vi, ',') << ']';
 }
-//вывод словаря
+
 template <typename Key, typename Value>
 ostream& operator << (ostream& out, const map<Key, Value>& m) {
   return out << '{' << Join(m, ',') << '}';

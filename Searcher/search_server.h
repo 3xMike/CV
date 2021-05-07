@@ -10,12 +10,12 @@
 #include <string_view>
 using namespace std;
 
-class InvertedIndex { //хранилище доков. Список документов для каждого слова ускоряет асимптотику и искпользуется в реальных поисковиках
+class InvertedIndex { 
 public:
-  void Add(string document); //move документ и все его слова записать
-  vector<size_t> Lookup(const string& word) const; // по слову выдаёт лист его доков
+  void Add(string document); 
+  vector<size_t> Lookup(const string& word) const; 
 
-  const string& GetDocument(size_t id) const {//возвращает док
+  const string& GetDocument(size_t id) const {
     return docs[id];
   }
 
@@ -23,19 +23,17 @@ public:
 	  return docs.size();
   }
 private:
-  // ВОПРОСЫ ЗДЕСЬ
-  //вместо листа либо вектор, либо словарь, т к пихаем только в конец и надо итерироваться
-  map<string, vector<size_t>> index; // каждому слову лист его документов, может быть по несколько раз (docid = docs[id]), поменял на вектор
-  vector<string> docs; // документы внутри // СЮДА MOVE
+  map<string, vector<size_t>> index; 
+  vector<string> docs; 
 };
 
 class SearchServer {
 public:
   SearchServer() = default;
-  explicit SearchServer(istream& document_input); // копия UpdateDocumentBase
-  void UpdateDocumentBase(istream& document_input); // заполняет index документами из потока
-  void AddQueriesStream(istream& query_input, ostream& search_results_output); // ВОПРОСЫ ЗДЕСЬ
+  explicit SearchServer(istream& document_input); 
+  void UpdateDocumentBase(istream& document_input); 
+  void AddQueriesStream(istream& query_input, ostream& search_results_output); 
 
 private:
-  InvertedIndex index; // хранилище доков // ВОПРОСЫ ЗДЕСЬ
+  InvertedIndex index; 
 };

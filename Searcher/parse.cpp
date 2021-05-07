@@ -8,7 +8,7 @@ string_view Strip(string_view s) {
     s.remove_suffix(1);
   }
   return s;
-} // удаление пробелов конец + начало
+} 
 
 vector<string_view> SplitBy(string_view s, char sep) {
   vector<string_view> result;
@@ -18,5 +18,5 @@ vector<string_view> SplitBy(string_view s, char sep) {
     s.remove_prefix(pos != s.npos ? pos + 1 : s.size());
   }
   return result;
-} // разделяет на подстроки с разделителем sep
+} 
 

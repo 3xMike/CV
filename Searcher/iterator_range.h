@@ -23,10 +23,9 @@ public:
 
 private:
   It first, last;
-};//просто рандомный итератор
+};
 
 template <typename Container>
 auto Head(Container& c, int top) {
   return IteratorRange(begin(c), begin(c) + min<size_t>(max(top, 0), c.size()));
 }
-// Функция Head для контейнера c выдаёт top первых элементов, если их есть столько

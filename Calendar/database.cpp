@@ -34,7 +34,7 @@ void Database::AddEvent(const Date& date, const string& event) {
 	}
 	auto beg = storage.at(date).begin();
 	auto end = storage.at(date).end();
-	if (find(beg,end, event) == end){//Ò å íå äîáàâëÿåì îäèíàêîâûå
+	if (find(beg,end, event) == end){
 		storage[date].push_back(event);
 	}
 }

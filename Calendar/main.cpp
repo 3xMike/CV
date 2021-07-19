@@ -26,8 +26,8 @@ int main() {
 	TestAll();
 
 	Database db;
-
-	for (string line; getline(cin, line); ) {
+	string line;
+	while(getline(cin, line)) {
 		istringstream is(line);
 
 		string command;
